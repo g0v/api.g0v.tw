@@ -1,0 +1,18 @@
+{
+    "name": "srwang/g0v-api",
+    "autoload": {
+        "psr-4": {
+            "Srwang\\G0vApi\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ronny Wang",
+            "email": "ronnywang@gmail.com"
+        }
+    ],
+    "require": {
+        "google/apiclient": "^2.10",
+        "rlanvin/php-rrule": "^2.4"
+    }
+}
