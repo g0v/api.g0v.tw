@@ -1,4 +1,3 @@
 - TODO:
   - g0v hackathon
-  - g0v calendar
   - g0v member
