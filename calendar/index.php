@@ -70,9 +70,22 @@ foreach ($obj->items as $item) {
             $result->htmlLink = $item->htmlLink;
             $result->start = $occurrence->format('Y-m-d') . 'T' . date('H:i:s', strtotime($item->start->dateTime));
             $result->end = $occurrence->format('Y-m-d') . 'T' . date('H:i:s', strtotime($item->end->dateTime));
+            $result->period = 'weekly';
             $ret->items[] = $result;
         }
+    } else {
+        $result = new StdClass;
+        $result->id = $item->id;
+        $result->summary = $item->summary;
+        $result->description = $item->description;
+        $result->location = $item->location;
+        $result->htmlLink = $item->htmlLink;
+        $result->start = $item->start->dateTime ?? $item->start->date;
+        $result->end = $item->end->dateTime ?? $item->end->date;
+        $result->period = 'once';
+        $ret->items[] = $result;
     }
+
 }
 
 header('Content-Type: application/json');
