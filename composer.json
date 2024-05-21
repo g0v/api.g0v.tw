@@ -12,7 +12,6 @@
         }
     ],
     "require": {
-        "google/apiclient": "^2.10",
         "rlanvin/php-rrule": "^2.4"
     }
 }

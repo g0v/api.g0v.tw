@@ -1,8 +1,6 @@
 <?php
 
 require_once(__DIR__ . '/../vendor/autoload.php');
-use Google\Client;
-use Google\Service\Calendar;
 use RRule\RRule;
 
 include(__DIR__ . '/../config.php');
