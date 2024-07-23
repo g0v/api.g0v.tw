@@ -3,7 +3,14 @@
 $curl = curl_init();
 $url = 'https://g0v.hackmd.io/@jothon/community99';
 curl_setopt($curl, CURLOPT_URL, $url);
+// ipv4
+curl_setopt($curl, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+curl_setopt($curl, CURLOPT_HTTPHEADER, [
+    'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+    'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36',
+]);
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($curl, CURLOPT_HEADER, false);
 $content = curl_exec($curl);
 preg_match_all('/\[([^\]]+)\]\(([^)]+)\)/', $content, $matches);
 
@@ -24,6 +31,10 @@ for ($i = 0; $i < 10; $i ++) {
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, [
+            'Accept: */*',
+            'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36',
+        ]);
         $content = curl_exec($curl);
         file_put_contents($tmp_file, $content);
     }
