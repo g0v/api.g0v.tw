@@ -10,3 +10,4 @@
 
 <h1>HackMD API</h1>
 <p><a href="/hackmd">/hackmd</a> : 取得 HackMD 各 Tag 的筆數和更新日期</p>
+<p><a href="/hackmd?tag=digital-resilience">/hackmd?tag=digital-resilience</a> : 取得 HackMD 中特定 tag 的文章列表</p>

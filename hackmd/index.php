@@ -1,5 +1,36 @@
 <?php
 
+if ($_GET['tag'] ?? false) {
+    $url = sprintf("https://raw.githubusercontent.com/g0v-data/g0v-hackmd-archive/main/tags/%s.md", $_GET['tag']);
+    $content = file_get_contents($url);
+    $lines = explode("\n", $content);
+    $records = [];
+    foreach ($lines as $line) {
+        if (strpos($line, '|') !== 0) {
+            continue;
+        }
+        $line = trim($line, '|');
+        $terms = explode('|', $line);
+        $terms = array_map('trim', $terms);
+        if (strpos($terms[1], '[') !== 0) {
+            continue;
+        }
+        $record = new StdClass;
+        if (!preg_match('#\[(.+)\]\((.+)\)#', $terms[1], $matches)) {
+            continue;
+        }
+        $record->title = $matches[1];
+        $record->id = explode('.', explode('/', $matches[2])[2])[0];
+        $record->updated_at = $terms[2];
+        $record->created_at = $terms[3];
+
+        $records[] = $record;
+    }
+    header('Content-Type: application/json');
+    header('Access-Control-Allow-Origin: *');
+    echo json_encode($records, JSON_PRETTY_PRINT);
+    exit;
+}
 $content = file_get_contents('https://raw.githubusercontent.com/g0v-data/g0v-hackmd-archive/main/README.md');
 $lines = explode("\n", $content);
 $records = [];
