@@ -9,4 +9,4 @@
 <p><a href="/community99">/community99</a> : 取得社群九分鐘資料</p>
 
 <h1>HackMD API</h1>
-<p><a href="/hackmd">/hackmd</a> : 取得 HackMD Tag 資料</p>
+<p><a href="/hackmd">/hackmd</a> : 取得 HackMD 各 Tag 的筆數和更新日期</p>
