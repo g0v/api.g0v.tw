@@ -3,6 +3,10 @@
 if ($_GET['tag'] ?? false) {
     $url = sprintf("https://raw.githubusercontent.com/g0v-data/g0v-hackmd-archive/main/tags/%s.md", $_GET['tag']);
     $content = file_get_contents($url);
+
+    $summaries = file_get_contents(sprintf("https://raw.githubusercontent.com/g0v-data/g0v-hackmd-archive/main/tags_summary/%s.json", urlencode($_GET['tag'])));
+    $summaries = json_decode($summaries) ?? new StdClass;
+
     $lines = explode("\n", $content);
     $records = [];
     foreach ($lines as $line) {
@@ -23,6 +27,11 @@ if ($_GET['tag'] ?? false) {
         $record->id = explode('.', explode('/', $matches[2])[2])[0];
         $record->updated_at = $terms[2];
         $record->created_at = $terms[3];
+        if (property_exists($summaries, $record->id)) {
+            $record->summary = $summaries->{$record->id};
+        } else {
+            $record->summary = '';
+        }
 
         $records[] = $record;
     }
