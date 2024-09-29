@@ -1,10 +1,10 @@
 <?php
 
 if ($_GET['tag'] ?? false) {
-    $url = sprintf("https://raw.githubusercontent.com/g0v-data/g0v-hackmd-archive/main/tags/%s.md", $_GET['tag']);
+    $url = sprintf("https://raw.githubusercontent.com/g0v-data/g0v-hackmd-archive/main/tags/%s.md", rawurlencode($_GET['tag']));
     $content = file_get_contents($url);
 
-    $summaries = file_get_contents(sprintf("https://raw.githubusercontent.com/g0v-data/g0v-hackmd-archive/main/tags_summary/%s.json", urlencode($_GET['tag'])));
+    $summaries = file_get_contents(sprintf("https://raw.githubusercontent.com/g0v-data/g0v-hackmd-archive/main/tags_summary/%s.json", rawurlencode($_GET['tag'])));
     $summaries = json_decode($summaries) ?? new StdClass;
 
     $lines = explode("\n", $content);
